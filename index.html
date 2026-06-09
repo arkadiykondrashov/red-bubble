@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>RED BUBBLE — vs the Square Invasion</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +44,31 @@
     border-radius: 3px; font-family: 'VT323', monospace; font-size: 20px;
   }
   #subhud { margin-top: 4px; font-size: 16px; color: #888; letter-spacing: 1px; }
+
+  /* ── Touch controls (shown only on coarse-pointer devices) ── */
+  body { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  #wrap { width: min(800px, 96vw, 140vh); }
+  canvas { width: 100%; height: auto; }
+  #touch { display: none; }
+  body.touch #hud, body.touch #subhud { display: none; }
+  body.touch #touch {
+    display: flex; position: fixed; left: 0; right: 0; bottom: 0;
+    justify-content: space-between; align-items: flex-end;
+    padding: 0 14px calc(14px + env(safe-area-inset-bottom));
+    pointer-events: none; z-index: 10;
+  }
+  #t-move { display: flex; gap: 12px; }
+  .tbtn {
+    pointer-events: auto; touch-action: none; user-select: none; -webkit-user-select: none;
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 2px solid rgba(255,34,68,0.7); background: rgba(20,6,44,0.55);
+    color: #ff99aa; font-family: 'VT323', monospace; font-size: 34px; line-height: 1;
+    text-shadow: 0 0 8px rgba(255,34,68,0.8);
+    box-shadow: 0 0 14px rgba(255,34,68,0.35), inset 0 0 12px rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tbtn:active { background: rgba(255,34,68,0.35); color: #fff; }
+  #t-jump { width: 86px; height: 86px; font-size: 26px; }
 </style>
 </head>
 <body>
@@ -53,6 +79,13 @@
 </div>
 <div id="hud"><kbd>◄</kbd><kbd>►</kbd> move &nbsp;·&nbsp; <kbd>SPACE</kbd> jump &nbsp;·&nbsp; stomp squares from above</div>
 <div id="subhud">grab pickups: ♥ life &nbsp;·&nbsp; ★ invuln &nbsp;·&nbsp; ↑ high jump &nbsp;·&nbsp; ⚡ electric halo</div>
+<div id="touch">
+  <div id="t-move">
+    <button class="tbtn" id="t-left" aria-label="move left">◀</button>
+    <button class="tbtn" id="t-right" aria-label="move right">▶</button>
+  </div>
+  <button class="tbtn" id="t-jump" aria-label="jump">JUMP</button>
+</div>
 
 <script>
 (() => {
@@ -531,20 +564,19 @@
 
   // ── INPUT ──────────────────────────────────────────────────
   const keys = {};
-  window.addEventListener('keydown', e => {
-    if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
-    keys[e.code] = true;
 
-    if (state === STATE.TITLE && (e.code === 'Space' || e.code === 'Enter')) {
+  // Advance menus, cutscene and boss dialogue (Space/Enter or a tap)
+  function uiAction() {
+    if (state === STATE.TITLE) {
       if (introSeen) { startGame(); }
       else { state = STATE.INTRO; introFrame = 0; frameTimer = 0; }
-    } else if (state === STATE.INTRO && (e.code === 'Space' || e.code === 'Enter')) {
+    } else if (state === STATE.INTRO) {
       introFrame++;
       frameTimer = 0;
       if (introFrame > 6) startGame();
-    } else if ((state === STATE.WIN || state === STATE.LOSE) && (e.code === 'Space' || e.code === 'Enter')) {
+    } else if (state === STATE.WIN || state === STATE.LOSE) {
       state = STATE.TITLE;
-    } else if (state === STATE.BOSS && bossDialog && bossIntroTimer === 0 && (e.code === 'Space' || e.code === 'Enter')) {
+    } else if (state === STATE.BOSS && bossDialog && bossIntroTimer === 0) {
       const line = boss.cfg.dialogue[bossDialog.idx];
       if (bossDialog.chars < line.text.length) {
         bossDialog.chars = line.text.length; // finish the line instantly
@@ -559,8 +591,38 @@
         }
       }
     }
+  }
+
+  window.addEventListener('keydown', e => {
+    if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code)) e.preventDefault();
+    keys[e.code] = true;
+    if (e.code === 'Space' || e.code === 'Enter') uiAction();
   });
   window.addEventListener('keyup', e => { keys[e.code] = false; });
+
+  // ── TOUCH CONTROLS ─────────────────────────────────────────
+  if (window.matchMedia?.('(pointer: coarse)').matches || 'ontouchstart' in window) {
+    document.body.classList.add('touch');
+  }
+  function bindTouchButton(id, code) {
+    const el = document.getElementById(id);
+    el.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      keys[code] = true;
+      if (code === 'Space') uiAction();
+    });
+    for (const ev of ['pointerup', 'pointercancel', 'pointerleave']) {
+      el.addEventListener(ev, e => { e.preventDefault(); keys[code] = false; });
+    }
+    el.addEventListener('contextmenu', e => e.preventDefault());
+  }
+  bindTouchButton('t-left', 'ArrowLeft');
+  bindTouchButton('t-right', 'ArrowRight');
+  bindTouchButton('t-jump', 'Space');
+  // Tapping the game screen also advances menus/dialogue
+  canvas.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'touch') uiAction();
+  });
 
   // ── GAME FLOW ──────────────────────────────────────────────
   function startGame() {
