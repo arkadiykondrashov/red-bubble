@@ -184,6 +184,187 @@
         { x: 2860, r: 22 },
       ],
     },
+    {
+      worldWidth: 3400,
+      bgType: 'cave',
+      playerStart: { x: 50, y: 300 },
+      flag: { x: 3240, y: 320, w: 4, h: 140 },
+      platforms: [
+        { x: 0,    y: 460, w: 3400, h: 40, type: 'ground' },
+        { x: 200,  y: 385, w: 100,  h: 16, type: 'solid' },
+        { x: 370,  y: 320, w: 90,   h: 16, type: 'fall'  },
+        { x: 540,  y: 380, w: 110,  h: 16, type: 'solid' },
+        { x: 740,  y: 300, w: 100,  h: 16, type: 'fall'  },
+        { x: 920,  y: 370, w: 120,  h: 16, type: 'solid' },
+        { x: 1110, y: 300, w: 90,   h: 16, type: 'fall'  },
+        { x: 1280, y: 370, w: 120,  h: 16, type: 'solid' },
+        { x: 1470, y: 300, w: 100,  h: 16, type: 'fall'  },
+        { x: 1650, y: 370, w: 130,  h: 16, type: 'solid' },
+        { x: 1860, y: 300, w: 90,   h: 16, type: 'fall'  },
+        { x: 2030, y: 370, w: 140,  h: 16, type: 'solid' },
+        { x: 2240, y: 295, w: 100,  h: 16, type: 'fall'  },
+        { x: 2420, y: 360, w: 120,  h: 16, type: 'solid' },
+        { x: 2620, y: 290, w: 110,  h: 16, type: 'fall'  },
+        { x: 2810, y: 360, w: 130,  h: 16, type: 'solid' },
+        { x: 3010, y: 300, w: 120,  h: 16, type: 'solid' },
+        { x: 878,  y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 1618, y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 2388, y: 380, w: 22,   h: 80, type: 'wall'  },
+      ],
+      enemyDefs: [
+        { x: 250,  y: 436, size: 24, vx:  1.2, range: [180,  340]  },
+        { x: 590,  y: 356, size: 22, vx: -1.2, range: [540,  650]  },
+        { x: 970,  y: 346, size: 26, vx:  1.2, range: [920,  1040] },
+        { x: 1200, y: 436, size: 28, vx: -1.2, range: [1080, 1380] },
+        { x: 1700, y: 346, size: 26, vx:  1.2, range: [1650, 1780] },
+        { x: 2080, y: 346, size: 24, vx: -1.2, range: [2030, 2170] },
+        { x: 2470, y: 336, size: 22, vx:  1.2, range: [2420, 2540] },
+        { x: 2700, y: 436, size: 28, vx: -1.2, range: [2550, 2920] },
+        { x: 2860, y: 336, size: 24, vx:  1.2, range: [2810, 2940] },
+        { x: 3060, y: 276, size: 22, vx: -1.2, range: [3010, 3130] },
+      ],
+      pickupDefs: [
+        { x: 250,  y: 360, type: 'life'     },
+        { x: 415,  y: 295, type: 'electric' },
+        { x: 790,  y: 275, type: 'life'     },
+        { x: 1155, y: 275, type: 'invuln'   },
+        { x: 1520, y: 275, type: 'highjump' },
+        { x: 2290, y: 270, type: 'electric' },
+        { x: 2675, y: 265, type: 'life'     },
+      ],
+      boulderDefs: [
+        { x: 470, r: 26 },
+        { x: 820, r: 24 },
+        { x: 1430, r: 28 },
+        { x: 1950, r: 26 },
+        { x: 2330, r: 24 },
+        { x: 2980, r: 26 },
+      ],
+    },
+    {
+      worldWidth: 3600,
+      bgType: 'ice',
+      slippery: true,
+      playerStart: { x: 50, y: 300 },
+      flag: { x: 3440, y: 320, w: 4, h: 140 },
+      platforms: [
+        { x: 0,    y: 460, w: 3600, h: 40, type: 'ground' },
+        { x: 210,  y: 385, w: 110,  h: 16, type: 'solid' },
+        { x: 400,  y: 320, w: 100,  h: 16, type: 'fall'  },
+        { x: 580,  y: 385, w: 120,  h: 16, type: 'solid' },
+        { x: 790,  y: 305, w: 100,  h: 16, type: 'fall'  },
+        { x: 970,  y: 375, w: 130,  h: 16, type: 'solid' },
+        { x: 1180, y: 300, w: 90,   h: 16, type: 'fall'  },
+        { x: 1360, y: 370, w: 130,  h: 16, type: 'solid' },
+        { x: 1570, y: 295, w: 100,  h: 16, type: 'fall'  },
+        { x: 1760, y: 365, w: 140,  h: 16, type: 'solid' },
+        { x: 1990, y: 295, w: 90,   h: 16, type: 'fall'  },
+        { x: 2170, y: 365, w: 140,  h: 16, type: 'solid' },
+        { x: 2390, y: 290, w: 110,  h: 16, type: 'fall'  },
+        { x: 2580, y: 360, w: 130,  h: 16, type: 'solid' },
+        { x: 2790, y: 290, w: 100,  h: 16, type: 'fall'  },
+        { x: 2970, y: 360, w: 140,  h: 16, type: 'solid' },
+        { x: 3190, y: 300, w: 130,  h: 16, type: 'solid' },
+        { x: 928,  y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 1718, y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 2538, y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 3148, y: 380, w: 22,   h: 80, type: 'wall'  },
+      ],
+      enemyDefs: [
+        { x: 260,  y: 436, size: 24, vx:  1.3, range: [190,  360]  },
+        { x: 630,  y: 361, size: 22, vx: -1.3, range: [580,  690]  },
+        { x: 1020, y: 351, size: 26, vx:  1.3, range: [970,  1090] },
+        { x: 1260, y: 436, size: 28, vx: -1.3, range: [1130, 1450] },
+        { x: 1810, y: 341, size: 26, vx:  1.3, range: [1760, 1890] },
+        { x: 2220, y: 341, size: 24, vx: -1.3, range: [2170, 2300] },
+        { x: 2630, y: 336, size: 22, vx:  1.3, range: [2580, 2700] },
+        { x: 2880, y: 436, size: 28, vx: -1.3, range: [2740, 3080] },
+        { x: 3020, y: 336, size: 24, vx:  1.3, range: [2970, 3100] },
+        { x: 3240, y: 276, size: 22, vx: -1.3, range: [3190, 3310] },
+      ],
+      pickupDefs: [
+        { x: 265,  y: 360, type: 'invuln'   },
+        { x: 450,  y: 295, type: 'life'     },
+        { x: 840,  y: 280, type: 'highjump' },
+        { x: 1225, y: 275, type: 'life'     },
+        { x: 1620, y: 270, type: 'electric' },
+        { x: 2035, y: 270, type: 'life'     },
+        { x: 2445, y: 265, type: 'invuln'   },
+        { x: 2840, y: 265, type: 'electric' },
+      ],
+      boulderDefs: [
+        { x: 500, r: 26 },
+        { x: 880, r: 24 },
+        { x: 1530, r: 28 },
+        { x: 2090, r: 25 },
+        { x: 2470, r: 27 },
+        { x: 3120, r: 23 },
+      ],
+    },
+    {
+      worldWidth: 3800,
+      bgType: 'void',
+      playerStart: { x: 50, y: 300 },
+      flag: { x: 3640, y: 320, w: 4, h: 140 },
+      platforms: [
+        { x: 0,    y: 460, w: 3800, h: 40, type: 'ground' },
+        { x: 220,  y: 380, w: 100,  h: 16, type: 'solid' },
+        { x: 400,  y: 310, w: 90,   h: 16, type: 'fall'  },
+        { x: 570,  y: 380, w: 110,  h: 16, type: 'solid' },
+        { x: 770,  y: 300, w: 90,   h: 16, type: 'fall'  },
+        { x: 950,  y: 370, w: 110,  h: 16, type: 'solid' },
+        { x: 1140, y: 295, w: 90,   h: 16, type: 'fall'  },
+        { x: 1320, y: 365, w: 120,  h: 16, type: 'solid' },
+        { x: 1520, y: 290, w: 90,   h: 16, type: 'fall'  },
+        { x: 1700, y: 360, w: 120,  h: 16, type: 'solid' },
+        { x: 1900, y: 290, w: 90,   h: 16, type: 'fall'  },
+        { x: 2080, y: 360, w: 130,  h: 16, type: 'solid' },
+        { x: 2290, y: 285, w: 100,  h: 16, type: 'fall'  },
+        { x: 2470, y: 355, w: 120,  h: 16, type: 'solid' },
+        { x: 2670, y: 285, w: 100,  h: 16, type: 'fall'  },
+        { x: 2850, y: 355, w: 130,  h: 16, type: 'solid' },
+        { x: 3060, y: 285, w: 100,  h: 16, type: 'fall'  },
+        { x: 3240, y: 355, w: 130,  h: 16, type: 'solid' },
+        { x: 3430, y: 295, w: 120,  h: 16, type: 'solid' },
+        { x: 908,  y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 1658, y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 2428, y: 380, w: 22,   h: 80, type: 'wall'  },
+        { x: 3198, y: 380, w: 22,   h: 80, type: 'wall'  },
+      ],
+      enemyDefs: [
+        { x: 270,  y: 436, size: 26, vx:  1.4, range: [200,  380]  },
+        { x: 620,  y: 356, size: 22, vx: -1.4, range: [570,  670]  },
+        { x: 1000, y: 346, size: 26, vx:  1.4, range: [950,  1050] },
+        { x: 1230, y: 436, size: 28, vx: -1.4, range: [1100, 1420] },
+        { x: 1750, y: 336, size: 26, vx:  1.4, range: [1700, 1810] },
+        { x: 2130, y: 336, size: 24, vx: -1.4, range: [2080, 2200] },
+        { x: 2520, y: 331, size: 22, vx:  1.4, range: [2470, 2580] },
+        { x: 2760, y: 436, size: 30, vx: -1.4, range: [2620, 2960] },
+        { x: 2900, y: 331, size: 24, vx:  1.4, range: [2850, 2970] },
+        { x: 3290, y: 331, size: 24, vx: -1.4, range: [3240, 3360] },
+        { x: 3480, y: 271, size: 22, vx:  1.4, range: [3430, 3540] },
+      ],
+      pickupDefs: [
+        { x: 270,  y: 355, type: 'life'     },
+        { x: 445,  y: 285, type: 'electric' },
+        { x: 815,  y: 275, type: 'life'     },
+        { x: 1185, y: 270, type: 'invuln'   },
+        { x: 1565, y: 265, type: 'highjump' },
+        { x: 1945, y: 265, type: 'life'     },
+        { x: 2340, y: 260, type: 'electric' },
+        { x: 2715, y: 260, type: 'invuln'   },
+        { x: 3105, y: 260, type: 'life'     },
+      ],
+      boulderDefs: [
+        { x: 520, r: 26 },
+        { x: 860, r: 25 },
+        { x: 1470, r: 28 },
+        { x: 2030, r: 26 },
+        { x: 2620, r: 24 },
+        { x: 3010, r: 27 },
+        { x: 3390, r: 23 },
+      ],
+    },
   ];
 
   // ── BOSS CONFIGS ───────────────────────────────────────────
@@ -199,18 +380,98 @@
       laserSpeed: 1.5,
       fireRate: 190,   // frames between shots
       telegraph: 90,   // charge-up frames before shot
+      arenaTop: '#0a1a08', arenaBot: '#040c04',
+      dialogue: [
+        { who: 'boss', text: 'HALT, little sphere. I am the GREEN KING, first knight of the Square Order.' },
+        { who: 'hero', text: 'You turned the moons square. Squares can\'t even roll!' },
+        { who: 'boss', text: 'Rolling is chaos. Corners are CIVILIZATION. Now hold still and be filed into a cube.' },
+        { who: 'hero', text: 'Come and catch me, your boxiness.' },
+      ],
+      defeatLine: 'Impossible... the corners... they fail me...',
+    },
+    {
+      name: 'THORN WARDEN',
+      targetX: 615, targetY: 390, size: 70,
+      hp: 6,
+      colorTop: '#2a7a3a', colorBot: '#08200c',
+      glowColor: 'rgba(60,220,120,0.45)',
+      laserColor: '#66ffaa',
+      laserR: 13,
+      laserSpeed: 1.9,
+      fireRate: 165,
+      telegraph: 80,
+      arenaTop: '#06200e', arenaBot: '#021006',
+      dialogue: [
+        { who: 'boss', text: 'So you trimmed the King down to size. I am the THORN WARDEN. This forest grows in straight lines now.' },
+        { who: 'hero', text: 'Trees aren\'t supposed to be rectangles. Neither are you.' },
+        { who: 'boss', text: 'Everything can be pruned, bubble. Even YOU have a perfect square waiting inside.' },
+        { who: 'hero', text: 'Nope. I checked. It\'s all bounce in here.' },
+      ],
+      defeatLine: 'My hedges... my beautiful right angles...',
+    },
+    {
+      name: 'MAGMA DUKE',
+      targetX: 612, targetY: 386, size: 74,
+      hp: 7,
+      colorTop: '#aa3a10', colorBot: '#2a0802',
+      glowColor: 'rgba(255,110,30,0.5)',
+      laserColor: '#ffaa33',
+      laserR: 13,
+      laserSpeed: 2.1,
+      aimed: true,
+      fireRate: 150,
+      telegraph: 70,
+      arenaTop: '#240803', arenaBot: '#0c0201',
+      dialogue: [
+        { who: 'boss', text: 'You roll into MY forge? I am the MAGMA DUKE. I cast the bricks that will pave over every curve in the galaxy.' },
+        { who: 'hero', text: 'Your bricks melted half this cave. Even the lava wants out.' },
+        { who: 'boss', text: 'Heat makes things HONEST. And honestly? You\'ll make a fine red tile.' },
+        { who: 'hero', text: 'I\'m more of a marble. Watch the trajectory.' },
+      ],
+      defeatLine: 'The forge... grows... cold...',
+    },
+    {
+      name: 'FROST BARON',
+      targetX: 608, targetY: 382, size: 78,
+      hp: 8,
+      colorTop: '#3a7ab0', colorBot: '#0a1c33',
+      glowColor: 'rgba(120,200,255,0.5)',
+      laserColor: '#88ddff',
+      laserR: 12,
+      laserSpeed: 2.3,
+      burst: 2,
+      fireRate: 140,
+      telegraph: 65,
+      arenaTop: '#06182c', arenaBot: '#020a14',
+      dialogue: [
+        { who: 'boss', text: 'Shhh. Listen. Hear that? Perfect silence. Perfect stillness. I am the FROST BARON, and I froze this world mid-roll.' },
+        { who: 'hero', text: 'You froze the playground. The round kids can\'t even sled anymore.' },
+        { who: 'boss', text: 'Ice crystals are square, little bubble. Nature AGREES with us.' },
+        { who: 'hero', text: 'Snowballs are round, your chilliness. Nature has spoken.' },
+      ],
+      defeatLine: 'I feel... warm? NO... not WARM...',
     },
     {
       name: 'THE BIG SQUARE',
-      targetX: 610, targetY: 379, size: 81,
-      hp: 8,
+      targetX: 600, targetY: 370, size: 90,
+      hp: 10,
       colorTop: '#5a0a6a', colorBot: '#150020',
       glowColor: 'rgba(180,30,210,0.5)',
       laserColor: '#cc44ff',
       laserR: 12,
-      laserSpeed: 2.2,
-      fireRate: 140,
-      telegraph: 65,
+      laserSpeed: 2.5,
+      aimed: true, burst: 2,
+      fireRate: 125,
+      telegraph: 55,
+      arenaTop: '#10010a', arenaBot: '#07000a',
+      dialogue: [
+        { who: 'boss', text: 'At last. The final circle. I am THE BIG SQUARE — I bent the moon to my geometry, and four knights knelt at my corners.' },
+        { who: 'hero', text: 'Knelt? They\'re flat now. I rolled over each one to get here.' },
+        { who: 'boss', text: 'A sphere is just a square that hasn\'t accepted the truth. When I am done, pi will equal FOUR.' },
+        { who: 'hero', text: 'Pi is mine, edge-lord. So are the moons. Last bounce — let\'s go.' },
+        { who: 'boss', text: 'THEN BE SQUARED.' },
+      ],
+      defeatLine: 'My corners... rounding... what a soft, soft world...',
     },
   ];
 
@@ -232,7 +493,10 @@
     x: 50, y: 300, vx: 0, vy: 0, r: 14,
     onGround: false, spin: 0, lives: MAX_LIVES, iframes: 0,
     powerInvuln: 0, powerHighJump: 0, powerElectric: 0,
+    coyote: 0, jumpBuf: 0, spaceHeld: false, wasGround: false,
+    squash: 0, stretch: 0, look: 1, trail: [],
   };
+  let bossDialog = null; // { idx, chars } while boss dialogue is playing
 
   // ── STARFIELD + MOONS ──────────────────────────────────────
   const stars = [];
@@ -280,6 +544,20 @@
       if (introFrame > 6) startGame();
     } else if ((state === STATE.WIN || state === STATE.LOSE) && (e.code === 'Space' || e.code === 'Enter')) {
       state = STATE.TITLE;
+    } else if (state === STATE.BOSS && bossDialog && bossIntroTimer === 0 && (e.code === 'Space' || e.code === 'Enter')) {
+      const line = boss.cfg.dialogue[bossDialog.idx];
+      if (bossDialog.chars < line.text.length) {
+        bossDialog.chars = line.text.length; // finish the line instantly
+      } else {
+        bossDialog.idx++;
+        bossDialog.chars = 0;
+        if (bossDialog.idx >= boss.cfg.dialogue.length) {
+          bossDialog = null;
+          player.iframes = 45;
+          player.spaceHeld = true; // don't turn the dismiss-press into a jump
+          boss.shootTimer = 0;
+        }
+      }
     }
   });
   window.addEventListener('keyup', e => { keys[e.code] = false; });
@@ -304,6 +582,8 @@
     player.x = lvl.playerStart.x; player.y = lvl.playerStart.y;
     player.vx = 0; player.vy = 0; player.onGround = false; player.spin = 0;
     player.iframes = 60;
+    player.coyote = 0; player.jumpBuf = 0; player.squash = 0; player.stretch = 0;
+    player.wasGround = false; player.trail.length = 0;
     cameraX = 0; particles.length = 0; shake = 0;
     state = STATE.PLAYING;
   }
@@ -325,13 +605,15 @@
       targetX: cfg.targetX,
       size: cfg.size, hp: cfg.hp, maxHp: cfg.hp,
       alive: true, iframes: 0, hurtTimer: 0,
-      shootTimer: 0, phase: 'intro', // intro → idle → charging → shoot → idle
-      laser: null, cfg,
+      shootTimer: 0, phase: 'intro', // intro → dialogue → idle → charging → shoot → idle
+      lasers: [], cfg,
     };
+    bossDialog = { idx: 0, chars: 0 };
     bossIntroTimer = 90;
     bossOutroTimer = 0;
     player.x = 70; player.y = 420;
     player.vx = 0; player.vy = 0; player.iframes = 90;
+    player.coyote = 0; player.jumpBuf = 0; player.trail.length = 0;
     cameraX = 0; particles.length = 0; shake = 0;
     state = STATE.BOSS;
   }
@@ -410,36 +692,61 @@
     else if (state === STATE.BOSS) updateBoss();
   }
 
-  function updateGame() {
+  // Shared player physics: input, jump (coyote time + jump buffering),
+  // variable gravity (floaty apex, heavy fall), platform landing.
+  function stepPlayer(plats, opts = {}) {
     if (player.iframes > 0) player.iframes--;
     if (player.powerInvuln > 0) player.powerInvuln--;
     if (player.powerHighJump > 0) player.powerHighJump--;
     if (player.powerElectric > 0) player.powerElectric--;
+    if (player.coyote > 0) player.coyote--;
+    if (player.jumpBuf > 0) player.jumpBuf--;
+    if (player.squash > 0) player.squash--;
+    if (player.stretch > 0) player.stretch--;
 
-    const accel = 0.55, maxSpeed = 4.2;
-    if (keys['ArrowLeft'])  player.vx = Math.max(player.vx - accel, -maxSpeed);
-    else if (keys['ArrowRight']) player.vx = Math.min(player.vx + accel, maxSpeed);
-    else player.vx *= 0.82;
+    // Jump buffering: register the press edge, keep it alive a few frames
+    if (keys['Space'] && !player.spaceHeld) player.jumpBuf = 8;
+    player.spaceHeld = !!keys['Space'];
 
-    const jumpV = player.powerHighJump > 0 ? -14.5 : -10.5;
+    const slippery = !opts.arena && LEVEL_DATA[currentLevel - 1]?.slippery;
+    const accel = !player.onGround ? 0.38 : slippery ? 0.3 : 0.6;
+    const maxSpeed = 4.4;
+    if (keys['ArrowLeft'])  { player.vx = Math.max(player.vx - accel, -maxSpeed); player.look = -1; }
+    else if (keys['ArrowRight']) { player.vx = Math.min(player.vx + accel, maxSpeed); player.look = 1; }
+    else player.vx *= !player.onGround ? 0.92 : slippery ? 0.985 : 0.8;
+
+    const jumpV = player.powerHighJump > 0 ? -14.5 : -10.8;
     const cutV  = player.powerHighJump > 0 ? -6 : -4;
-    if (keys['Space'] && player.onGround) {
+    if (player.jumpBuf > 0 && (player.onGround || player.coyote > 0)) {
       player.vy = jumpV; player.onGround = false;
+      player.coyote = 0; player.jumpBuf = 0; player.stretch = 12;
       burst(player.x, player.y + player.r, player.powerHighJump > 0 ? '#88ff88' : '#ff8888', 8, 2);
     }
     if (!keys['Space'] && player.vy < cutV) player.vy = cutV;
 
-    player.vy = Math.min(player.vy + 0.55, 13);
+    // Variable gravity: hang at the apex, fall with weight
+    let grav = 0.55;
+    if (!player.onGround) {
+      if (Math.abs(player.vy) < 1.6) grav = 0.34;
+      else if (player.vy > 0) grav = 0.7;
+    }
+    const prevVy = player.vy;
+    player.vy = Math.min(player.vy + grav, 13.5);
     player.x += player.vx;
     player.y += player.vy;
     player.spin += player.vx * 0.06;
 
+    // Motion trail
+    player.trail.push({ x: player.x, y: player.y });
+    if (player.trail.length > 9) player.trail.shift();
+
     // Platform top-landing
+    const wasGround = player.wasGround;
     let landed = false;
-    for (const p of platforms) {
+    for (const p of plats) {
       if (p.gone || p.type === 'wall') continue;
       const py = p.y + (p.dropY || 0);
-      if (p.falling && !p.gone) {
+      if (!opts.arena && p.falling && !p.gone) {
         p.fallTimer++;
         if (p.fallTimer > 28) {
           p.dropY = (p.dropY || 0) + 5;
@@ -450,11 +757,23 @@
         const wasAbove = (player.y - player.vy) + player.r <= py + 1;
         if (player.vy >= 0 && wasAbove && player.y + player.r >= py && player.y + player.r <= py + p.h + Math.abs(player.vy) + 2) {
           player.y = py - player.r; player.vy = 0; player.onGround = true; landed = true;
-          if (p.type === 'fall' && !p.falling) p.falling = true;
+          if (!opts.arena && p.type === 'fall' && !p.falling) p.falling = true;
         }
       }
     }
     if (!landed) player.onGround = false;
+    // Squash on hard landings, coyote window when walking off a ledge
+    if (landed && !wasGround && prevVy > 5) {
+      player.squash = 10;
+      burst(player.x, player.y + player.r, 'rgba(220,200,230,0.8)', 5, 1.5);
+    }
+    if (!landed && wasGround && player.vy >= 0) player.coyote = 7;
+    player.wasGround = landed;
+    return landed;
+  }
+
+  function updateGame() {
+    stepPlayer(platforms);
 
     // Wall side collision
     for (const p of platforms) {
@@ -493,9 +812,9 @@
       else respawn();
     }
 
-    // Camera
-    const targetCam = Math.max(0, Math.min(player.x - W * 0.35, worldWidth - W));
-    cameraX += (targetCam - cameraX) * 0.12;
+    // Camera with velocity lookahead
+    const targetCam = Math.max(0, Math.min(player.x - W * 0.38 + player.vx * 24, worldWidth - W));
+    cameraX += (targetCam - cameraX) * 0.1;
 
     // Enemies
     for (const en of enemies) {
@@ -538,19 +857,14 @@
   }
 
   function updateBoss() {
-    if (player.iframes > 0) player.iframes--;
-    if (player.powerInvuln > 0) player.powerInvuln--;
-    if (player.powerHighJump > 0) player.powerHighJump--;
-    if (player.powerElectric > 0) player.powerElectric--;
-
     // Boss outro: count down then transition
     if (bossOutroTimer > 0) {
       bossOutroTimer--;
       if (bossOutroTimer === 0) {
-        if (currentLevel === 1) {
+        if (currentLevel < LEVEL_DATA.length) {
           // heal one life as reward
           if (player.lives < MAX_LIVES) player.lives++;
-          startLevel(2);
+          startLevel(currentLevel + 1);
         } else {
           winGame();
         }
@@ -567,39 +881,18 @@
       boss.x = 820 + (boss.targetX - 820) * eased;
     }
 
-    // Player movement (same physics, against boss arena platforms)
-    const accel = 0.55, maxSpeed = 4.2;
-    if (keys['ArrowLeft'])  player.vx = Math.max(player.vx - accel, -maxSpeed);
-    else if (keys['ArrowRight']) player.vx = Math.min(player.vx + accel, maxSpeed);
-    else player.vx *= 0.82;
-
-    const jumpV = player.powerHighJump > 0 ? -14.5 : -10.5;
-    const cutV  = player.powerHighJump > 0 ? -6 : -4;
-    if (keys['Space'] && player.onGround) {
-      player.vy = jumpV; player.onGround = false;
-      burst(player.x, player.y + player.r, player.powerHighJump > 0 ? '#88ff88' : '#ff8888', 8, 2);
+    // Dialogue: typewriter ticks, world holds its breath
+    if (bossDialog && bossIntroTimer === 0) {
+      const line = boss.cfg.dialogue[bossDialog.idx];
+      if (bossDialog.chars < line.text.length) bossDialog.chars += 0.9;
+      return;
     }
-    if (!keys['Space'] && player.vy < cutV) player.vy = cutV;
 
-    player.vy = Math.min(player.vy + 0.55, 13);
-    player.x += player.vx;
-    player.y += player.vy;
-    player.spin += player.vx * 0.06;
+    // Player movement (shared physics, against boss arena platforms)
+    stepPlayer(BOSS_ARENA_PLATFORMS, { arena: true });
 
     // Keep player in arena
     player.x = Math.max(player.r, Math.min(W - player.r, player.x));
-
-    // Platform landing (boss arena platforms, no fall/wall types here)
-    let landed = false;
-    for (const p of BOSS_ARENA_PLATFORMS) {
-      if (player.x + player.r > p.x && player.x - player.r < p.x + p.w) {
-        const wasAbove = (player.y - player.vy) + player.r <= p.y + 1;
-        if (player.vy >= 0 && wasAbove && player.y + player.r >= p.y && player.y + player.r <= p.y + p.h + Math.abs(player.vy) + 2) {
-          player.y = p.y - player.r; player.vy = 0; player.onGround = true; landed = true;
-        }
-      }
-    }
-    if (!landed) player.onGround = false;
 
     if (player.y > H + 80) {
       player.lives--;
@@ -622,27 +915,34 @@
       const charging = boss.shootTimer >= cfg.fireRate - cfg.telegraph;
 
       if (boss.shootTimer >= cfg.fireRate) {
-        // Fire laser
+        // Fire laser(s): later bosses aim at the player and fire bursts
         const mouthX = boss.x;
         const mouthY = boss.y + boss.size * 0.52;
-        boss.laser = { x: mouthX, y: mouthY, r: cfg.laserR, vx: -cfg.laserSpeed };
+        const n = cfg.burst || 1;
+        for (let i = 0; i < n; i++) {
+          let lvx = -cfg.laserSpeed, lvy = 0;
+          if (cfg.aimed) {
+            const adx = player.x - mouthX, ady = player.y - mouthY;
+            const d = Math.hypot(adx, ady) || 1;
+            lvx = Math.min(adx / d * cfg.laserSpeed, -0.5);
+            lvy = ady / d * cfg.laserSpeed;
+          }
+          boss.lasers.push({ x: mouthX, y: mouthY, r: cfg.laserR, vx: lvx, vy: lvy - i * 1.1 });
+        }
         boss.shootTimer = 0;
         shake = 3;
         burst(mouthX, mouthY, cfg.laserColor, 10, 3);
       }
 
-      // Update laser
-      if (boss.laser) {
-        boss.laser.x += boss.laser.vx;
-        if (boss.laser.x < -30) boss.laser = null;
-
-        // Laser-player collision
-        if (boss.laser) {
-          const ldx = player.x - boss.laser.x;
-          const ldy = player.y - boss.laser.y;
-          if (Math.hypot(ldx, ldy) < player.r + boss.laser.r - 2) {
-            takeDamage(ldx);
-          }
+      // Update lasers
+      for (let i = boss.lasers.length - 1; i >= 0; i--) {
+        const l = boss.lasers[i];
+        l.x += l.vx; l.y += l.vy;
+        if (l.x < -30 || l.y < -30 || l.y > H + 30) { boss.lasers.splice(i, 1); continue; }
+        const ldx = player.x - l.x;
+        const ldy = player.y - l.y;
+        if (Math.hypot(ldx, ldy) < player.r + l.r - 2) {
+          takeDamage(ldx);
         }
       }
 
@@ -679,66 +979,116 @@
     if (boss.hp <= 0) bossDefeated();
   }
 
-  // ── BACKGROUNDS ────────────────────────────────────────────
-  function drawSpace() {
+  // ── THEMES + BACKGROUNDS ───────────────────────────────────
+  const THEMES = {
+    space: {
+      sky: ['#180838', '#0c0420', '#030108'],
+      neb1: 'rgba(180,60,200,0.18)', neb2: 'rgba(60,100,220,0.16)', star: '#ffffff',
+      moonHues: ['#bcd9ff', '#ffe2b0', '#d8b8ff'],
+      groundTop: '#3b1a55', groundBot: '#0d0420', groundEdge: '#ff2244',
+      groundGlow: 'rgba(255,60,100,0.4)', grid: 'rgba(255,80,130,0.15)',
+      solidTop: '#7a8aa0', solidMid: '#4a5a72', solidBot: '#1f2738',
+      solidEdge: '#a8b8d0', solidDot: '#cdd9ee',
+      ambient: null,
+    },
+    forest: {
+      sky: ['#051a0a', '#031208', '#010801'],
+      neb1: 'rgba(30,180,60,0.15)', neb2: 'rgba(10,140,80,0.13)', star: '#aaffcc',
+      moonHues: ['#88ccaa', '#aaddbb', '#77bb99'],
+      groundTop: '#1a3a0a', groundBot: '#050f02', groundEdge: '#44aa22',
+      groundGlow: 'rgba(80,180,40,0.3)', grid: 'rgba(60,140,30,0.12)',
+      solidTop: '#3a6a2a', solidMid: '#1e4018', solidBot: '#0a1a06',
+      solidEdge: '#66bb44', solidDot: '#88dd66',
+      ambient: 'fireflies',
+    },
+    cave: {
+      sky: ['#300c04', '#1a0502', '#070100'],
+      neb1: 'rgba(255,90,20,0.16)', neb2: 'rgba(200,40,10,0.13)', star: '#ffccaa',
+      moonHues: ['#ff9966', '#cc6633', '#ffbb88'],
+      groundTop: '#4a1505', groundBot: '#150400', groundEdge: '#ff6622',
+      groundGlow: 'rgba(255,120,40,0.4)', grid: 'rgba(255,120,40,0.15)',
+      solidTop: '#7a4a30', solidMid: '#4a2a18', solidBot: '#1a0d05',
+      solidEdge: '#cc8855', solidDot: '#ffbb77',
+      ambient: 'embers',
+    },
+    ice: {
+      sky: ['#0a2440', '#051426', '#01060e'],
+      neb1: 'rgba(100,180,255,0.15)', neb2: 'rgba(60,120,220,0.12)', star: '#cceeff',
+      moonHues: ['#bbeeff', '#88ccee', '#ddf6ff'],
+      groundTop: '#1a3a5a', groundBot: '#050f1f', groundEdge: '#66ddff',
+      groundGlow: 'rgba(120,200,255,0.4)', grid: 'rgba(120,200,255,0.16)',
+      solidTop: '#9ad4ee', solidMid: '#4a7a9a', solidBot: '#1a3048',
+      solidEdge: '#cceeff', solidDot: '#ffffff',
+      ambient: 'snow',
+    },
+    void: {
+      sky: ['#1c0430', '#0e021c', '#030008'],
+      neb1: 'rgba(160,40,255,0.2)', neb2: 'rgba(255,40,120,0.12)', star: '#eeccff',
+      moonHues: ['#cc88ff', '#ff66aa', '#9944dd'],
+      groundTop: '#2a0a3a', groundBot: '#0a0214', groundEdge: '#cc44ff',
+      groundGlow: 'rgba(200,80,255,0.4)', grid: 'rgba(200,80,255,0.15)',
+      solidTop: '#6a4a8a', solidMid: '#3a2455', solidBot: '#160a26',
+      solidEdge: '#bb88ee', solidDot: '#eeccff',
+      ambient: 'motes',
+    },
+  };
+  function curTheme() {
+    return THEMES[LEVEL_DATA[currentLevel - 1]?.bgType] || THEMES.space;
+  }
+
+  // Ambient weather particles (screen space)
+  const ambient = [];
+  function updateAmbient(kind) {
+    if (kind && ambient.length < 50 && Math.random() < 0.35) {
+      if (kind === 'snow')      ambient.push({ kind, x: Math.random()*W, y: -6, vx: 0, vy: 0.5+Math.random()*0.8, ph: Math.random()*7, life: 900 });
+      else if (kind === 'embers') ambient.push({ kind, x: Math.random()*W, y: H+6, vx: 0, vy: -(0.5+Math.random()*0.9), ph: Math.random()*7, life: 900 });
+      else                      ambient.push({ kind, x: Math.random()*W, y: Math.random()*H*0.85, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, ph: Math.random()*7, life: 240+Math.random()*240 });
+    }
+    for (let i = ambient.length-1; i >= 0; i--) {
+      const a = ambient[i];
+      a.ph += 0.05; a.life--;
+      a.x += a.vx + (a.kind === 'snow' || a.kind === 'embers' ? Math.sin(a.ph)*0.5 : 0);
+      a.y += a.vy;
+      if (a.kind !== kind || a.life <= 0 || a.y < -12 || a.y > H+12) { ambient.splice(i, 1); continue; }
+      const flick = 0.4 + Math.abs(Math.sin(a.ph*1.7))*0.6;
+      ctx.globalAlpha = flick * Math.min(1, a.life/60);
+      if (a.kind === 'snow')        { ctx.fillStyle = '#e8f6ff'; ctx.fillRect(a.x, a.y, 2.5, 2.5); }
+      else if (a.kind === 'embers') { ctx.fillStyle = Math.random()<0.5 ? '#ffaa44' : '#ff6622'; ctx.fillRect(a.x, a.y, 2.5, 2.5); }
+      else if (a.kind === 'fireflies') { ctx.fillStyle = '#ddffaa'; ctx.beginPath(); ctx.arc(a.x, a.y, 1.8, 0, Math.PI*2); ctx.fill(); }
+      else                          { ctx.fillStyle = '#cc99ff'; ctx.beginPath(); ctx.arc(a.x, a.y, 1.6, 0, Math.PI*2); ctx.fill(); }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function drawBackground(th) {
     const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, '#180838'); g.addColorStop(0.4, '#0c0420'); g.addColorStop(1, '#030108');
+    g.addColorStop(0, th.sky[0]); g.addColorStop(0.4, th.sky[1]); g.addColorStop(1, th.sky[2]);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
     const t = performance.now() * 0.00008;
     const neb1 = ctx.createRadialGradient(W*0.3+Math.sin(t)*30, H*0.4, 20, W*0.3, H*0.4, 240);
-    neb1.addColorStop(0, 'rgba(180,60,200,0.18)'); neb1.addColorStop(1, 'rgba(0,0,0,0)');
+    neb1.addColorStop(0, th.neb1); neb1.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = neb1; ctx.fillRect(0, 0, W, H);
     const neb2 = ctx.createRadialGradient(W*0.75, H*0.65, 20, W*0.75, H*0.65, 220);
-    neb2.addColorStop(0, 'rgba(60,100,220,0.16)'); neb2.addColorStop(1, 'rgba(0,0,0,0)');
+    neb2.addColorStop(0, th.neb2); neb2.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = neb2; ctx.fillRect(0, 0, W, H);
 
     for (const s of stars) {
       s.tw += s.sp;
       ctx.globalAlpha = 0.35 + Math.abs(Math.sin(s.tw)) * 0.65;
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = th.star;
       ctx.fillRect(((s.x - cameraX * s.depth) % W + W) % W, s.y, s.s, s.s);
     }
     ctx.globalAlpha = 1;
-    for (const m of moons) drawSquareMoon(m.x - cameraX * m.parallax, m.y, m.size, m.hue, m.rot);
-  }
-
-  function drawForest() {
-    const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, '#051a0a'); g.addColorStop(0.4, '#031208'); g.addColorStop(1, '#010801');
-    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-
-    const t = performance.now() * 0.00006;
-    const neb1 = ctx.createRadialGradient(W*0.35+Math.sin(t)*25, H*0.35, 15, W*0.35, H*0.35, 220);
-    neb1.addColorStop(0, 'rgba(30,180,60,0.15)'); neb1.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = neb1; ctx.fillRect(0, 0, W, H);
-    const neb2 = ctx.createRadialGradient(W*0.72, H*0.6, 15, W*0.72, H*0.6, 200);
-    neb2.addColorStop(0, 'rgba(10,140,80,0.13)'); neb2.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = neb2; ctx.fillRect(0, 0, W, H);
-
-    // Stars tinted green
-    for (const s of stars) {
-      s.tw += s.sp;
-      ctx.globalAlpha = (0.25 + Math.abs(Math.sin(s.tw)) * 0.5) * 0.7;
-      ctx.fillStyle = '#aaffcc';
-      ctx.fillRect(((s.x - cameraX * s.depth) % W + W) % W, s.y, s.s, s.s);
-    }
-    ctx.globalAlpha = 1;
-
-    // Green-tinted moons
-    const greenMoons = [
-      { x: 200,  y: 85,  size: 50, hue: '#88ccaa', rot: 0.05,  parallax: 0.12 },
-      { x: 580,  y: 65,  size: 66, hue: '#aaddbb', rot: -0.09, parallax: 0.15 },
-      { x: 1150, y: 120, size: 40, hue: '#77bb99', rot: 0.17,  parallax: 0.18 },
-    ];
-    for (const m of greenMoons) drawSquareMoon(m.x - cameraX * m.parallax, m.y, m.size, m.hue, m.rot);
+    moons.forEach((m, i) =>
+      drawSquareMoon(m.x - cameraX * m.parallax, m.y, m.size, th.moonHues[i % th.moonHues.length], m.rot));
+    updateAmbient(th.ambient);
   }
 
   function drawBossArenaBackground() {
     const g = ctx.createLinearGradient(0, 0, 0, H);
-    const c1 = currentLevel === 1 ? '#0a1a08' : '#10010a';
-    const c2 = currentLevel === 1 ? '#040c04' : '#07000a';
-    g.addColorStop(0, c1); g.addColorStop(1, c2);
+    const cfgA = BOSS_CONFIGS[currentLevel - 1];
+    g.addColorStop(0, cfgA.arenaTop); g.addColorStop(1, cfgA.arenaBot);
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
     // Ominous radial glow behind boss
@@ -786,19 +1136,15 @@
   }
 
   function drawGround(p) {
-    const isFn = LEVEL_DATA[currentLevel-1]?.bgType === 'forest';
+    const th = curTheme();
     const grad = ctx.createLinearGradient(0, p.y, 0, p.y + p.h);
-    if (isFn) {
-      grad.addColorStop(0, '#1a3a0a'); grad.addColorStop(1, '#050f02');
-    } else {
-      grad.addColorStop(0, '#3b1a55'); grad.addColorStop(1, '#0d0420');
-    }
+    grad.addColorStop(0, th.groundTop); grad.addColorStop(1, th.groundBot);
     ctx.fillStyle = grad; ctx.fillRect(p.x, p.y, p.w, p.h);
-    ctx.fillStyle = isFn ? '#44aa22' : '#ff2244';
+    ctx.fillStyle = th.groundEdge;
     ctx.fillRect(p.x, p.y, p.w, 2);
-    ctx.fillStyle = isFn ? 'rgba(80,180,40,0.3)' : 'rgba(255,60,100,0.4)';
+    ctx.fillStyle = th.groundGlow;
     ctx.fillRect(p.x, p.y+2, p.w, 1);
-    ctx.strokeStyle = isFn ? 'rgba(60,140,30,0.12)' : 'rgba(255,80,130,0.15)';
+    ctx.strokeStyle = th.grid;
     ctx.lineWidth = 1;
     ctx.beginPath();
     for (let i = p.x; i < p.x + p.w; i += 30) { ctx.moveTo(i, p.y+6); ctx.lineTo(i, p.y+p.h); }
@@ -835,17 +1181,13 @@
     }
 
     if (p.type === 'solid') {
-      const isFn = LEVEL_DATA[currentLevel-1]?.bgType === 'forest';
+      const th = curTheme();
       const grad = ctx.createLinearGradient(0, py, 0, py+p.h);
-      if (isFn) {
-        grad.addColorStop(0, '#3a6a2a'); grad.addColorStop(0.5, '#1e4018'); grad.addColorStop(1, '#0a1a06');
-      } else {
-        grad.addColorStop(0, '#7a8aa0'); grad.addColorStop(0.5, '#4a5a72'); grad.addColorStop(1, '#1f2738');
-      }
+      grad.addColorStop(0, th.solidTop); grad.addColorStop(0.5, th.solidMid); grad.addColorStop(1, th.solidBot);
       ctx.fillStyle = grad; ctx.fillRect(p.x, py, p.w, p.h);
-      ctx.fillStyle = isFn ? '#66bb44' : '#a8b8d0';
+      ctx.fillStyle = th.solidEdge;
       ctx.fillRect(p.x, py, p.w, 2);
-      ctx.fillStyle = isFn ? '#88dd66' : '#cdd9ee';
+      ctx.fillStyle = th.solidDot;
       for (let i = 8; i < p.w-4; i += 22) ctx.fillRect(p.x+i, py+6, 3, 3);
       ctx.fillStyle = 'rgba(0,0,0,0.6)';
       ctx.fillRect(p.x, py+p.h-2, p.w, 2);
@@ -893,21 +1235,48 @@
     ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.stroke();
   }
 
-  function drawPlayer(x, y, r, spin) {
-    const glow = ctx.createRadialGradient(x, y, r*0.3, x, y, r*3);
+  function drawPlayer(x, y, r, spin, anim) {
+    // Squash on landing, stretch on jump
+    let sy = 1, look = 0;
+    if (anim) {
+      if (anim.squash > 0) sy = 1 - 0.22 * (anim.squash / 10);
+      else if (anim.stretch > 0) sy = 1 + 0.16 * (anim.stretch / 12);
+      look = anim.look || 0;
+    }
+    const sx = 1 / sy;
+    ctx.save();
+    ctx.translate(x, y + (1 - sy) * r); // keep feet planted while squashing
+    ctx.scale(sx, sy);
+
+    const glow = ctx.createRadialGradient(0, 0, r*0.3, 0, 0, r*3);
     glow.addColorStop(0,'rgba(255,60,90,0.6)'); glow.addColorStop(1,'rgba(255,60,90,0)');
-    ctx.fillStyle = glow; ctx.fillRect(x-r*3, y-r*3, r*6, r*6);
-    const grad = ctx.createRadialGradient(x-r*0.4, y-r*0.5, r*0.2, x, y, r);
+    ctx.fillStyle = glow; ctx.fillRect(-r*3, -r*3, r*6, r*6);
+    const grad = ctx.createRadialGradient(-r*0.4, -r*0.5, r*0.2, 0, 0, r);
     grad.addColorStop(0,'#ffccd0'); grad.addColorStop(0.35,'#ff3050'); grad.addColorStop(1,'#5a0010');
     ctx.fillStyle = grad;
-    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
-    ctx.save(); ctx.translate(x,y); ctx.rotate(spin);
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI*2); ctx.fill();
+    // Rolling band
+    ctx.save(); ctx.rotate(spin);
     ctx.fillStyle='rgba(255,200,210,0.45)'; ctx.fillRect(-r*0.7,-r*0.15,r*1.4,2);
     ctx.restore();
+    // Shine
     ctx.fillStyle='rgba(255,255,255,0.85)';
-    ctx.beginPath(); ctx.arc(x-r*0.45, y-r*0.5, r*0.22, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(-r*0.45, -r*0.55, r*0.2, 0, Math.PI*2); ctx.fill();
+    // Eyes track movement direction
+    const ex = look * r * 0.18;
+    for (const side of [-1, 1]) {
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.ellipse(side*r*0.28 + ex, -r*0.12, r*0.2, r*0.26, 0, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#2a0008';
+      ctx.beginPath(); ctx.arc(side*r*0.28 + ex + look*r*0.07, -r*0.1, r*0.1, 0, Math.PI*2); ctx.fill();
+    }
+    // Smile
+    ctx.strokeStyle='#3a0010'; ctx.lineWidth=Math.max(1.2, r*0.09);
+    ctx.beginPath(); ctx.arc(ex*0.6, r*0.3, r*0.32, 0.25*Math.PI, 0.75*Math.PI); ctx.stroke();
+    // Outline
     ctx.strokeStyle='#2a0008'; ctx.lineWidth=1.5;
-    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.stroke();
+    ctx.restore();
   }
 
   function drawEnemy(en) {
@@ -1022,9 +1391,11 @@
   }
 
   function drawBossLaser() {
-    if (!boss || !boss.laser) return;
-    const l = boss.laser;
+    if (!boss) return;
     const t = performance.now() * 0.01;
+    for (const l of boss.lasers) drawOneLaser(l, t);
+  }
+  function drawOneLaser(l, t) {
     // Glow
     const glow = ctx.createRadialGradient(l.x, l.y, 2, l.x, l.y, l.r*2.5);
     glow.addColorStop(0, boss.cfg.laserColor+'cc'); glow.addColorStop(1,'rgba(0,0,0,0)');
@@ -1231,9 +1602,7 @@
     if (state === STATE.BOSS) {
       drawBossArenaBackground();
     } else {
-      const lvl = LEVEL_DATA[currentLevel - 1];
-      if (lvl && lvl.bgType === 'forest') drawForest();
-      else drawSpace();
+      drawBackground(curTheme());
     }
 
     ctx.save();
@@ -1264,10 +1633,20 @@
 
     // Player
     if(state===STATE.PLAYING||state===STATE.WIN||state===STATE.BOSS){
+      // Motion trail when moving fast
+      if (Math.hypot(player.vx, player.vy) > 3) {
+        for (let i = 0; i < player.trail.length - 1; i++) {
+          const tp = player.trail[i];
+          ctx.globalAlpha = 0.05 + (i / player.trail.length) * 0.16;
+          ctx.fillStyle = '#ff3050';
+          ctx.beginPath(); ctx.arc(tp.x, tp.y, player.r * (0.4 + 0.5 * i / player.trail.length), 0, Math.PI*2); ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
       if(player.powerElectric>0) drawElectricHalo(player.x,player.y,player.r);
       ctx.save();
       if(player.iframes>0) ctx.globalAlpha=(Math.floor(player.iframes/4)%2===0)?0.3:1;
-      drawPlayer(player.x,player.y,player.r,player.spin);
+      drawPlayer(player.x,player.y,player.r,player.spin,player);
       ctx.restore();
       if(player.powerInvuln>0) drawInvulnAura(player.x,player.y,player.r);
       if(player.powerHighJump>0) drawHighJumpTrail(player.x,player.y,player.r);
@@ -1306,6 +1685,36 @@
       ctx.fillText('Jump on top · Use ⚡ · Dodge the laser!', W/2, H/2+60);
       ctx.textAlign='left';
     }
+
+    // Pre-fight dialogue box
+    if (bossDialog && bossIntroTimer === 0 && bossOutroTimer === 0) {
+      const cfg = boss.cfg;
+      const line = cfg.dialogue[bossDialog.idx];
+      const shown = line.text.substring(0, Math.floor(bossDialog.chars));
+      const isBoss = line.who === 'boss';
+      ctx.fillStyle = 'rgba(0,0,0,0.4)'; ctx.fillRect(0, 0, W, H);
+      const bx = 60, bw = W - 120, bh = 118, by = H - 152;
+      ctx.fillStyle = 'rgba(8,2,20,0.93)'; ctx.fillRect(bx, by, bw, bh);
+      ctx.strokeStyle = isBoss ? cfg.laserColor : '#ff3050';
+      ctx.lineWidth = 2; ctx.strokeRect(bx, by, bw, bh);
+      // Speaker portrait
+      if (isBoss) drawBossSquare(bx + 48, by + bh/2, 54);
+      else drawPlayer(bx + 48, by + bh/2, 24, performance.now() * 0.002);
+      // Name + text
+      ctx.textAlign = 'left';
+      ctx.font = '20px "VT323",monospace';
+      ctx.fillStyle = isBoss ? cfg.laserColor : '#ff7090';
+      ctx.fillText(isBoss ? cfg.name : 'RED BUBBLE', bx + 96, by + 26);
+      ctx.fillStyle = '#fff'; ctx.font = '21px "VT323",monospace';
+      wrapText(shown, bx + 96, by + 50, bw - 116, 22);
+      // Advance prompt
+      if (bossDialog.chars >= line.text.length && Math.floor(performance.now()/400)%2) {
+        ctx.fillStyle = '#aaa'; ctx.font = '18px "VT323",monospace'; ctx.textAlign = 'right';
+        ctx.fillText('SPACE ▸', bx + bw - 12, by + bh - 10);
+        ctx.textAlign = 'left';
+      }
+    }
+
     if (bossOutroTimer > 0 && bossOutroTimer < 100) {
       const alpha = Math.min(1, (100-bossOutroTimer)/40);
       ctx.fillStyle = `rgba(0,0,0,${alpha*0.6})`;
@@ -1314,14 +1723,31 @@
       ctx.fillStyle='#ffee88';
       ctx.font='48px "Bungee Shade",monospace';
       ctx.shadowColor='#ffee88'; ctx.shadowBlur=20;
-      ctx.fillText(currentLevel===1?'LEVEL 1 CLEAR!':'YOU WIN!', W/2, H/2-10);
+      const last = currentLevel === LEVEL_DATA.length;
+      ctx.fillText(last ? 'YOU WIN!' : 'LEVEL '+currentLevel+' CLEAR!', W/2, H/2-10);
       ctx.shadowBlur=0;
-      if (currentLevel===1) {
+      ctx.fillStyle='#ccaadd'; ctx.font='22px "VT323",monospace';
+      ctx.fillText('"' + boss.cfg.defeatLine + '"', W/2, H/2+28);
+      if (!last) {
+        const next = ['Off to the green planet...', 'Down into the molten caves...',
+          'Onward to the frozen wastes...', 'Into the void citadel...'][currentLevel-1];
         ctx.fillStyle='#aaffaa'; ctx.font='24px "VT323",monospace';
-        ctx.fillText('Off to the green planet...', W/2, H/2+30);
+        ctx.fillText(next, W/2, H/2+62);
       }
       ctx.textAlign='left';
     }
+  }
+
+  function wrapText(text, x, y, maxW, lineH) {
+    const words = text.split(' ');
+    let line = '';
+    for (const w of words) {
+      const test = line ? line + ' ' + w : w;
+      if (ctx.measureText(test).width > maxW && line) {
+        ctx.fillText(line, x, y); y += lineH; line = w;
+      } else line = test;
+    }
+    if (line) ctx.fillText(line, x, y);
   }
 
   // ── TITLE SCREEN ────────────────────────────────────────────
@@ -1337,7 +1763,7 @@
     ctx.fillStyle='#ddccaa'; ctx.font='36px "Bungee Shade",monospace'; ctx.fillText('vs',W/2,270);
     drawBossSquare(W/2+80,260,56);
     ctx.fillStyle='#ffe0a8'; ctx.font='22px "VT323",monospace';
-    ctx.fillText('2 levels · 2 boss fights · 5 lives', W/2, 350);
+    ctx.fillText('5 levels · 5 boss fights · 5 lives', W/2, 350);
     ctx.fillText('Stomp every square. Save the round world.', W/2, 374);
     if(Math.floor(performance.now()/500)%2){
       ctx.fillStyle='#fff'; ctx.font='26px "VT323",monospace';
@@ -1504,7 +1930,7 @@
     ctx.fillStyle='rgba(0,30,20,0.6)'; ctx.fillRect(0,0,W,H);
     ctx.textAlign='center';
     ctx.fillStyle='#aaffcc'; ctx.font='54px "Bungee Shade",monospace'; ctx.fillText('VICTORY!',W/2,H/2-50);
-    ctx.fillStyle='#ffee88'; ctx.font='28px "VT323",monospace'; ctx.fillText('Both bosses defeated!',W/2,H/2);
+    ctx.fillStyle='#ffee88'; ctx.font='28px "VT323",monospace'; ctx.fillText('All five bosses defeated!',W/2,H/2);
     ctx.fillStyle='#fff'; ctx.font='22px "VT323",monospace'; ctx.fillText('The round world endures... for now.',W/2,H/2+36);
     if(Math.floor(performance.now()/500)%2){ctx.fillStyle='#ff99cc'; ctx.fillText('▸ SPACE for title screen ◂',W/2,H/2+80);}
     ctx.textAlign='left';
