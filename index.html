@@ -422,6 +422,7 @@
       laserSpeed: 1.5,
       fireRate: 190,   // frames between shots
       telegraph: 90,   // charge-up frames before shot
+      shieldOff: 165, shieldOn: 120,   // vulnerable window / shielded window (frames)
       arenaTop: '#0a1a08', arenaBot: '#040c04',
       dialogue: [
         { who: 'boss', text: 'HALT, little sphere. I am the GREEN KING, first knight of the Square Order.' },
@@ -442,6 +443,7 @@
       laserSpeed: 1.9,
       fireRate: 165,
       telegraph: 80,
+      shieldOff: 150, shieldOn: 130,
       arenaTop: '#06200e', arenaBot: '#021006',
       dialogue: [
         { who: 'boss', text: 'So you trimmed the King down to size. I am the THORN WARDEN. This forest grows in straight lines now.' },
@@ -463,6 +465,7 @@
       aimed: true,
       fireRate: 150,
       telegraph: 70,
+      shieldOff: 135, shieldOn: 140,
       arenaTop: '#240803', arenaBot: '#0c0201',
       dialogue: [
         { who: 'boss', text: 'You roll into MY forge? I am the MAGMA DUKE. I cast the bricks that will pave over every curve in the galaxy.' },
@@ -484,6 +487,7 @@
       burst: 2,
       fireRate: 140,
       telegraph: 65,
+      shieldOff: 120, shieldOn: 150,
       arenaTop: '#06182c', arenaBot: '#020a14',
       dialogue: [
         { who: 'boss', text: 'Shhh. Listen. Hear that? Perfect silence. Perfect stillness. I am the FROST BARON, and I froze this world mid-roll.' },
@@ -505,6 +509,7 @@
       aimed: true, burst: 2,
       fireRate: 125,
       telegraph: 55,
+      shieldOff: 110, shieldOn: 160,
       arenaTop: '#10010a', arenaBot: '#07000a',
       dialogue: [
         { who: 'boss', text: 'At last. The final circle. I am THE BIG SQUARE — I bent the moon to my geometry, and four knights knelt at my corners.' },
@@ -681,10 +686,12 @@
         }
       }
       if (!dead && state === STATE.BOSS && boss && boss.alive &&
-          bossIntroTimer === 0 && !bossDialog && boss.iframes === 0) {
+          bossIntroTimer === 0 && !bossDialog) {
         const bCx = boss.x + boss.size/2, bCy = boss.y + boss.size/2;
         if (Math.abs(s.x - bCx) < boss.size/2 + s.r && Math.abs(s.y - bCy) < boss.size/2 + s.r) {
-          hitBoss(); dead = true;
+          if (boss.shielded) { deflectShield(); dead = true; }
+          else if (boss.iframes === 0) { hitBoss(); dead = true; }
+          // else: brief post-hit i-frames — let the shot pass through
         }
       }
       if (dead) shots.splice(i, 1);
@@ -736,6 +743,7 @@
       alive: true, iframes: 0, hurtTimer: 0,
       shootTimer: 0, phase: 'intro', // intro → dialogue → idle → charging → shoot → idle
       lasers: [], cfg,
+      shielded: false, shieldTimer: cfg.shieldOff, // start vulnerable
     };
     bossDialog = { idx: 0, chars: 0 };
     bossIntroTimer = 90;
@@ -834,9 +842,11 @@
     if (player.stretch > 0) player.stretch--;
     if (player.shootCd > 0) player.shootCd--;
 
-    // Jump buffering: register the press edge, keep it alive a few frames
-    if (keys['Space'] && !player.spaceHeld) player.jumpBuf = 8;
-    player.spaceHeld = !!keys['Space'];
+    // Jump buffering: register the press edge, keep it alive a few frames.
+    // Jump is Space OR Up arrow.
+    const jumpHeld = keys['Space'] || keys['ArrowUp'];
+    if (jumpHeld && !player.spaceHeld) player.jumpBuf = 8;
+    player.spaceHeld = !!jumpHeld;
 
     const slippery = !opts.arena && LEVEL_DATA[currentLevel - 1]?.slippery;
     const accel = !player.onGround ? 0.38 : slippery ? 0.3 : 0.6;
@@ -852,7 +862,7 @@
       player.coyote = 0; player.jumpBuf = 0; player.stretch = 12;
       burst(player.x, player.y + player.r, player.powerHighJump > 0 ? '#88ff88' : '#ff8888', 8, 2);
     }
-    if (!keys['Space'] && player.vy < cutV) player.vy = cutV;
+    if (!jumpHeld && player.vy < cutV) player.vy = cutV;
 
     // Variable gravity: hang at the apex, fall with weight
     let grav = 0.55;
@@ -1049,6 +1059,17 @@
       const cfg = boss.cfg;
       const charging = boss.shootTimer >= cfg.fireRate - cfg.telegraph;
 
+      // Periodic energy shield: cycles vulnerable ↔ shielded. Only shoot it
+      // down during the vulnerable window.
+      boss.shieldTimer--;
+      if (boss.shieldTimer <= 0) {
+        boss.shielded = !boss.shielded;
+        boss.shieldTimer = boss.shielded ? cfg.shieldOn : cfg.shieldOff;
+        const scx = boss.x + boss.size/2, scy = boss.y + boss.size/2;
+        if (boss.shielded) { burst(scx, scy, '#aee6ff', 18, 5); shake = 3; }
+        else { burst(scx, scy, '#ffee88', 16, 5); } // shield drops — opening!
+      }
+
       if (boss.shootTimer >= cfg.fireRate) {
         // Fire laser(s): later bosses aim at the player and fire bursts
         const mouthX = boss.x;
@@ -1106,12 +1127,22 @@
   }
 
   function hitBoss() {
+    if (boss.shielded) { deflectShield(); return; }
+    if (boss.iframes > 0) return;
     boss.hp--;
     boss.hurtTimer = 20;
     boss.iframes = 55;
     burst(boss.x + boss.size/2, boss.y + boss.size/2, '#ffffff', 14, 6);
     shake = 7;
     if (boss.hp <= 0) bossDefeated();
+  }
+
+  // Damage bounced off the active shield: sparks, no HP loss, short throttle
+  function deflectShield() {
+    boss.iframes = Math.max(boss.iframes, 12);
+    const cx = boss.x + boss.size/2, cy = boss.y + boss.size/2;
+    burst(cx, cy, '#aee6ff', 8, 4); burst(cx, cy, '#ffffff', 4, 5);
+    shake = 2;
   }
 
   // ── THEMES + BACKGROUNDS ───────────────────────────────────
@@ -1525,6 +1556,39 @@
     }
   }
 
+  function drawBossShield() {
+    if (!boss || !boss.alive || bossIntroTimer > 0 || bossDialog || !boss.shielded) return;
+    const s = boss.size, cx = boss.x + s/2, cy = boss.y + s/2, R = s * 0.98;
+    const now = performance.now();
+    // Flicker when the shield is about to drop (last ~30 frames)
+    const dropping = boss.shieldTimer < 30;
+    const flick = dropping ? (0.45 + 0.55 * Math.abs(Math.sin(now * 0.05))) : 1;
+    ctx.save();
+    // Fill bubble
+    const g = ctx.createRadialGradient(cx, cy, R*0.55, cx, cy, R);
+    g.addColorStop(0, 'rgba(120,200,255,0)');
+    g.addColorStop(0.75, `rgba(120,200,255,${0.22*flick})`);
+    g.addColorStop(1, `rgba(170,225,255,${0.55*flick})`);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.fill();
+    // Rim
+    ctx.globalAlpha = 0.85 * flick;
+    ctx.strokeStyle = '#aee6ff'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI*2); ctx.stroke();
+    // Rotating hex facets
+    ctx.globalAlpha = 0.4 * flick; ctx.lineWidth = 1;
+    ctx.strokeStyle = '#ffffff';
+    const rot = now * 0.0012;
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a = rot + i * Math.PI/3;
+      ctx.moveTo(cx + Math.cos(a)*R, cy + Math.sin(a)*R);
+      ctx.lineTo(cx + Math.cos(a + Math.PI/3)*R, cy + Math.sin(a + Math.PI/3)*R);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
   function drawPlayerShot(s) {
     const glow = ctx.createRadialGradient(s.x, s.y, 1, s.x, s.y, s.r*2.8);
     glow.addColorStop(0, 'rgba(255,90,120,0.95)'); glow.addColorStop(1, 'rgba(255,40,70,0)');
@@ -1714,8 +1778,8 @@
     if (!boss || !boss.alive) return;
     const bw = 320, bh = 22, bx = W/2 - bw/2, by = 14;
     // Background
-    ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(bx-4, by-4, bw+8, bh+24);
-    ctx.strokeStyle=boss.cfg.laserColor+'88'; ctx.lineWidth=1.5; ctx.strokeRect(bx-4, by-4, bw+8, bh+24);
+    ctx.fillStyle='rgba(0,0,0,0.7)'; ctx.fillRect(bx-4, by-4, bw+8, bh+42);
+    ctx.strokeStyle=boss.cfg.laserColor+'88'; ctx.lineWidth=1.5; ctx.strokeRect(bx-4, by-4, bw+8, bh+42);
     // Boss name
     ctx.fillStyle=boss.cfg.laserColor; ctx.font='16px "VT323",monospace'; ctx.textAlign='center';
     ctx.fillText(boss.cfg.name, W/2, by+32); ctx.textAlign='left';
@@ -1734,6 +1798,20 @@
       ctx.beginPath(); ctx.moveTo(bx+bw*i/boss.maxHp, by); ctx.lineTo(bx+bw*i/boss.maxHp, by+bh); ctx.stroke();
     }
     ctx.strokeStyle=boss.cfg.laserColor+'cc'; ctx.lineWidth=1.5; ctx.strokeRect(bx, by, bw, bh);
+
+    // Shield status — tells the player when the boss can be hurt
+    if (bossIntroTimer === 0 && !bossDialog) {
+      ctx.textAlign='center'; ctx.font='15px "VT323",monospace';
+      if (boss.shielded) {
+        const drop = boss.shieldTimer < 30;
+        ctx.fillStyle = drop ? '#ffee66' : '#8fd6ff';
+        ctx.fillText(drop ? '◇ SHIELD DROPPING… ◇' : '◆ SHIELDED — hold fire ◆', W/2, by+bh+20);
+      } else {
+        ctx.fillStyle = (Math.floor(performance.now()/200)%2) ? '#ff5570' : '#ffaa55';
+        ctx.fillText('▶ VULNERABLE — SHOOT! ◀', W/2, by+bh+20);
+      }
+      ctx.textAlign='left';
+    }
 
     // Lives in boss fight
     ctx.fillStyle='rgba(0,0,20,0.55)'; ctx.fillRect(8,10,MAX_LIVES*26+12,32);
@@ -1759,6 +1837,7 @@
       // Boss arena platforms
       for(const p of BOSS_ARENA_PLATFORMS) drawPlatform(p);
       drawBossEnemy();
+      drawBossShield();
       drawBossLaser();
       for(const s of shots) drawPlayerShot(s);
     } else {
@@ -1830,7 +1909,7 @@
       ctx.fillText(boss.cfg.name, W/2, H/2+30);
       ctx.font='20px "VT323",monospace';
       ctx.fillStyle='#ffcc88';
-      ctx.fillText('Jump on top · Shoot (CMD) · Dodge the laser!', W/2, H/2+60);
+      ctx.fillText('Shoot (CMD) when the shield drops · Dodge the laser!', W/2, H/2+60);
       ctx.textAlign='left';
     }
 
