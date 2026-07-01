@@ -57,7 +57,7 @@
     padding: 0 14px calc(14px + env(safe-area-inset-bottom));
     pointer-events: none; z-index: 10;
   }
-  #t-move { display: flex; gap: 12px; }
+  #t-move, #t-actions { display: flex; gap: 12px; align-items: flex-end; }
   .tbtn {
     pointer-events: auto; touch-action: none; user-select: none; -webkit-user-select: none;
     width: 72px; height: 72px; border-radius: 50%;
@@ -69,6 +69,12 @@
   }
   .tbtn:active { background: rgba(255,34,68,0.35); color: #fff; }
   #t-jump { width: 86px; height: 86px; font-size: 26px; }
+  #t-shoot {
+    border-color: rgba(255,80,90,0.85); color: #ff5566; font-size: 38px;
+    background: rgba(60,6,18,0.6);
+    box-shadow: 0 0 16px rgba(255,50,70,0.5), inset 0 0 12px rgba(0,0,0,0.5);
+  }
+  #t-shoot:active { background: rgba(255,50,70,0.4); color: #fff; }
 </style>
 </head>
 <body>
@@ -77,14 +83,17 @@
   <div id="scanlines"></div>
   <div id="vignette"></div>
 </div>
-<div id="hud"><kbd>◄</kbd><kbd>►</kbd> move &nbsp;·&nbsp; <kbd>SPACE</kbd> jump &nbsp;·&nbsp; stomp squares from above</div>
+<div id="hud"><kbd>◄</kbd><kbd>►</kbd> move &nbsp;·&nbsp; <kbd>SPACE</kbd> jump &nbsp;·&nbsp; <kbd>CMD</kbd> shoot &nbsp;·&nbsp; stomp squares from above</div>
 <div id="subhud">grab pickups: ♥ life &nbsp;·&nbsp; ★ invuln &nbsp;·&nbsp; ↑ high jump &nbsp;·&nbsp; ⚡ electric halo</div>
 <div id="touch">
   <div id="t-move">
     <button class="tbtn" id="t-left" aria-label="move left">◀</button>
     <button class="tbtn" id="t-right" aria-label="move right">▶</button>
   </div>
-  <button class="tbtn" id="t-jump" aria-label="jump">JUMP</button>
+  <div id="t-actions">
+    <button class="tbtn" id="t-shoot" aria-label="shoot">✷</button>
+    <button class="tbtn" id="t-jump" aria-label="jump">JUMP</button>
+  </div>
 </div>
 
 <script>
@@ -516,7 +525,8 @@
   ];
 
   // ── ACTIVE GAME STATE ──────────────────────────────────────
-  let platforms = [], enemies = [], pickups = [], boulders = [];
+  let platforms = [], enemies = [], pickups = [], boulders = [], shots = [];
+  let touchShoot = false;
   let flag = { x: 2260, y: 320, w: 4, h: 140 };
   let worldWidth = 2500;
   let boss = null;
@@ -527,7 +537,7 @@
     onGround: false, spin: 0, lives: MAX_LIVES, iframes: 0,
     powerInvuln: 0, powerHighJump: 0, powerElectric: 0,
     coyote: 0, jumpBuf: 0, spaceHeld: false, wasGround: false,
-    squash: 0, stretch: 0, look: 1, trail: [],
+    squash: 0, stretch: 0, look: 1, trail: [], shootCd: 0,
   };
   let bossDialog = null; // { idx, chars } while boss dialogue is playing
 
@@ -619,10 +629,67 @@
   bindTouchButton('t-left', 'ArrowLeft');
   bindTouchButton('t-right', 'ArrowRight');
   bindTouchButton('t-jump', 'Space');
+  // Shoot button: press-and-hold auto-fires (rate limited by cooldown)
+  (() => {
+    const el = document.getElementById('t-shoot');
+    if (!el) return;
+    el.addEventListener('pointerdown', e => { e.preventDefault(); touchShoot = true; });
+    for (const ev of ['pointerup', 'pointercancel', 'pointerleave']) {
+      el.addEventListener(ev, e => { e.preventDefault(); touchShoot = false; });
+    }
+    el.addEventListener('contextmenu', e => e.preventDefault());
+  })();
   // Tapping the game screen also advances menus/dialogue
   canvas.addEventListener('pointerdown', e => {
     if (e.pointerType === 'touch') uiAction();
   });
+
+  // Fire on the Cmd (Meta) or Ctrl keys — left or right — or the touch button
+  function wantsToShoot() {
+    return keys['MetaLeft'] || keys['MetaRight'] ||
+           keys['ControlLeft'] || keys['ControlRight'] || touchShoot;
+  }
+  function fireShot() {
+    if (state === STATE.BOSS && (bossIntroTimer > 0 || bossDialog)) return;
+    if (player.shootCd > 0) return;
+    player.shootCd = 13;
+    const dir = player.look || 1;
+    const sx = player.x + dir * player.r, sy = player.y - 1;
+    shots.push({ x: sx, y: sy, vx: dir * 9.5, r: 5, life: 80 });
+    burst(sx, sy, '#ff5570', 5, 3);
+  }
+
+  // Advance every laser and resolve hits (enemies while exploring, boss in the arena)
+  function updateShots() {
+    for (let i = shots.length - 1; i >= 0; i--) {
+      const s = shots[i];
+      s.x += s.vx; s.life--;
+      if (Math.random() < 0.5) particles.push({ x: s.x, y: s.y, vx: 0, vy: 0, life: 8, max: 8, c: '#ff5570', s: 2 });
+      let dead = s.life <= 0;
+      if (state === STATE.PLAYING && (s.x < cameraX - 30 || s.x > cameraX + W + 30)) dead = true;
+      if (state === STATE.BOSS && (s.x < -30 || s.x > W + 30)) dead = true;
+
+      if (!dead && state === STATE.PLAYING) {
+        for (const en of enemies) {
+          if (!en.alive) continue;
+          const cx = en.x + en.size/2, cy = en.y + en.size/2;
+          if (Math.abs(s.x - cx) < en.size/2 + s.r && Math.abs(s.y - cy) < en.size/2 + s.r) {
+            en.alive = false;
+            burst(cx, cy, '#ff3050', 16, 5); burst(cx, cy, '#ffffff', 6, 6);
+            shake = 4; dead = true; break;
+          }
+        }
+      }
+      if (!dead && state === STATE.BOSS && boss && boss.alive &&
+          bossIntroTimer === 0 && !bossDialog && boss.iframes === 0) {
+        const bCx = boss.x + boss.size/2, bCy = boss.y + boss.size/2;
+        if (Math.abs(s.x - bCx) < boss.size/2 + s.r && Math.abs(s.y - bCy) < boss.size/2 + s.r) {
+          hitBoss(); dead = true;
+        }
+      }
+      if (dead) shots.splice(i, 1);
+    }
+  }
 
   // ── GAME FLOW ──────────────────────────────────────────────
   function startGame() {
@@ -645,8 +712,8 @@
     player.vx = 0; player.vy = 0; player.onGround = false; player.spin = 0;
     player.iframes = 60;
     player.coyote = 0; player.jumpBuf = 0; player.squash = 0; player.stretch = 0;
-    player.wasGround = false; player.trail.length = 0;
-    cameraX = 0; particles.length = 0; shake = 0;
+    player.wasGround = false; player.trail.length = 0; player.shootCd = 0;
+    cameraX = 0; particles.length = 0; shake = 0; shots.length = 0;
     state = STATE.PLAYING;
   }
 
@@ -657,7 +724,7 @@
     platforms = lvl.platforms.map(p => ({ ...p, falling: false, fallTimer: 0, dropY: 0, gone: false }));
     boulders = lvl.boulderDefs.map(b => ({ ...b, y: 460 - b.r }));
     enemies = lvl.enemyDefs.map(d => ({ ...d, alive: true }));
-    cameraX = 0;
+    cameraX = 0; shots.length = 0; player.shootCd = 0;
   }
 
   function startBossFight(level) {
@@ -675,8 +742,8 @@
     bossOutroTimer = 0;
     player.x = 70; player.y = 420;
     player.vx = 0; player.vy = 0; player.iframes = 90;
-    player.coyote = 0; player.jumpBuf = 0; player.trail.length = 0;
-    cameraX = 0; particles.length = 0; shake = 0;
+    player.coyote = 0; player.jumpBuf = 0; player.trail.length = 0; player.shootCd = 0;
+    cameraX = 0; particles.length = 0; shake = 0; shots.length = 0;
     state = STATE.BOSS;
   }
 
@@ -765,6 +832,7 @@
     if (player.jumpBuf > 0) player.jumpBuf--;
     if (player.squash > 0) player.squash--;
     if (player.stretch > 0) player.stretch--;
+    if (player.shootCd > 0) player.shootCd--;
 
     // Jump buffering: register the press edge, keep it alive a few frames
     if (keys['Space'] && !player.spaceHeld) player.jumpBuf = 8;
@@ -836,6 +904,8 @@
 
   function updateGame() {
     stepPlayer(platforms);
+    if (wantsToShoot()) fireShot();
+    updateShots();
 
     // Wall side collision
     for (const p of platforms) {
@@ -955,6 +1025,9 @@
 
     // Keep player in arena
     player.x = Math.max(player.r, Math.min(W - player.r, player.x));
+
+    if (wantsToShoot()) fireShot();
+    updateShots();
 
     if (player.y > H + 80) {
       player.lives--;
@@ -1452,6 +1525,17 @@
     }
   }
 
+  function drawPlayerShot(s) {
+    const glow = ctx.createRadialGradient(s.x, s.y, 1, s.x, s.y, s.r*2.8);
+    glow.addColorStop(0, 'rgba(255,90,120,0.95)'); glow.addColorStop(1, 'rgba(255,40,70,0)');
+    ctx.fillStyle = glow; ctx.fillRect(s.x - s.r*3, s.y - s.r*3, s.r*6, s.r*6);
+    // Elongated core along travel
+    ctx.fillStyle = '#ff2f50';
+    ctx.beginPath(); ctx.ellipse(s.x, s.y, s.r*1.9, s.r*0.85, 0, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath(); ctx.arc(s.x, s.y, s.r*0.5, 0, Math.PI*2); ctx.fill();
+  }
+
   function drawBossLaser() {
     if (!boss) return;
     const t = performance.now() * 0.01;
@@ -1676,6 +1760,7 @@
       for(const p of BOSS_ARENA_PLATFORMS) drawPlatform(p);
       drawBossEnemy();
       drawBossLaser();
+      for(const s of shots) drawPlayerShot(s);
     } else {
       ctx.translate(-cameraX+sx, sy);
       for(const p of platforms) if(p.type==='ground') drawPlatform(p);
@@ -1684,6 +1769,7 @@
       drawFlag();
       for(const en of enemies) drawEnemy(en);
       for(const pk of pickups) if(!pk.taken) drawPickup(pk);
+      for(const s of shots) drawPlayerShot(s);
     }
 
     // Particles
@@ -1744,7 +1830,7 @@
       ctx.fillText(boss.cfg.name, W/2, H/2+30);
       ctx.font='20px "VT323",monospace';
       ctx.fillStyle='#ffcc88';
-      ctx.fillText('Jump on top · Use ⚡ · Dodge the laser!', W/2, H/2+60);
+      ctx.fillText('Jump on top · Shoot (CMD) · Dodge the laser!', W/2, H/2+60);
       ctx.textAlign='left';
     }
 
